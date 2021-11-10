@@ -1,5 +1,5 @@
-function y = myMeasurementFcnlonghai(x)
+function y = myMeasurementFcnlonghai(u)
 
-y=[0;0;x(3);0;0;x(6);0;0;x(9)]
+y=u;
 end
 
