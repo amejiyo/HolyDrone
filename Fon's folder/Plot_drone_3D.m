@@ -3,13 +3,13 @@
 
 
 
-realx=out.position(:,1)
-realy=out.position(:,2)
-realz=out.position(:,3)
-realt=out.time
-realRx=out.ZYX(:,3)
-realRy=out.ZYX(:,2)
-realRz=out.ZYX(:,1)
+realx=position(:,1)
+realy=position(:,2)
+realz=position(:,3)
+realt=time
+realRx=ZYX(:,3)
+realRy=ZYX(:,2)
+realRz=ZYX(:,1)
 
 realx=transpose(realx)
 realy=transpose(realy)
