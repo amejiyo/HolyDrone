@@ -12,9 +12,7 @@ function c = jacomeasure(x)
 %         -cos(x(7)),0,0];
         
 
-d_r = [cos(x(7))*cos(x(9))*sin(x(8))   , sin(x(8))*sin(x(9)) + cos(x(8))*cos(x(9))*sin(x(7))   , - cos(x(8))*cos(x(9)) - sin(x(7))*sin(x(8))*sin(x(9));
-        cos(x(7))*sin(x(8))*sin(x(9))  , cos(x(8))*sin(x(7))*sin(x(9)) - cos(x(9))*sin(x(8))   ,   cos(x(9))*sin(x(7))*sin(x(8)) - cos(x(8))*sin(x(9));
-         -sin(x(7))*sin(x(8))       ,                        cos(x(7))*cos(x(8))      ,                                      0];
+d_r = [sin(x(7))*sin(x(9)) + cos(x(7))*cos(x(9))*sin(x(8)), cos(x(8))*cos(x(9))*sin(x(7)), - cos(x(7))*cos(x(9)) - sin(x(7))*sin(x(8))*sin(x(9));cos(x(7))*sin(x(8))*sin(x(9)) - cos(x(9))*sin(x(7)), cos(x(8))*sin(x(7))*sin(x(9)),   cos(x(9))*sin(x(7))*sin(x(8)) - cos(x(7))*sin(x(9)); cos(x(7))*cos(x(8)),        -sin(x(7))*sin(x(8)),                                           0];
 c=[diag([1;1;1]),zeros(3),zeros(3);zeros(3),zeros(3),d_r];
 end
 
