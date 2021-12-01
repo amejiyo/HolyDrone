@@ -4,19 +4,11 @@ x2=x(4:6,:);
 deltat=0.01;
 r=x(7:9,:);
 J=[1,sin(r(1))*tan(r(2)),cos(r(1))*tan(r(2)); 0,cos(r(1)),-sin(r(1)); 0,sin(r(1))/cos(r(2)),cos(r(1))/cos(r(2)) ];
-r_j=J*r;
-dj=[0,sin(r(1))/(sin(r(2))^2) ,0; 0,0,0; 0,sin(r(1))*sin(r(2))/(cos(r(2)^2)),0];
-% dj=[0,sin(r(1))/1 ,0; 0,0,0; 0,sin(r(1))*sin(r(2))/(cos(r(2)^2)),0];
-if any(isnan(dj), 'all')
-    dj=zeros(3);
-end
-r_dj=dj*r;
+% r_j=J*r; % 3x1
 q=x1.*deltat + x2.*deltat^2 ;
-dt=deltat;
-a=[diag([1,1,1]),deltat.*diag([1,1,1]),zeros(3);         zeros(3),diag([1,1,1]),zeros(3);         deltat.*diag(r_j),deltat^2.*diag(r_j),[x1(1) + x1(2)*(dt*cos(r(1))*tan(r(2)) + 1) - x1(3)*(dt*sin(r(1))*tan(r(2)) - 1),         dt*x1(3)*cos(r(1))*(tan(r(2))^2 + 1) + dt*x1(2)*sin(r(1))*(tan(r(2))^2 + 1),            0;                               - dt*x1(3)*cos(r(1)) - dt*x1(2)*sin(r(1)),                                                          x1(1) + x1(2) + x1(3),            0;             (dt*x1(2)*cos(r(1)))/cos(r(2)) - (dt*x1(3)*sin(r(1)))/cos(r(2)), (dt*x1(3)*cos(r(1))*sin(r(2)))/cos(r(2))^2 + (dt*x1(2)*sin(r(1))*sin(r(2)))/cos(r(2))^2, x1(1) + x1(2) + x1(3)]   ];
-% x=zeros(9);
-%a = [1 0 0 0.01 0 0 0 0 0;0 1 0 0 0.01 0 0 0 0;0 0 1 0 0 0.01 0 0 0;0 0 0 1 0 0 0 0 0;0 0 0 0 1 0 0 0 0;0 0 0 0 0 1 0 0 0;0.01 0 0 0.0001 0 0 1 0 0;0 0.01 0 0 0.0001 0 0 1 0;0 0 0.01 0 0 0.0001 0 0 1];
+dt = deltat;
+a=[diag([1,1,1]),diag([dt,dt,dt]),zeros(3);       zeros(3),diag([1,1,1]),zeros(3);            deltat.*J ,deltat^2.*J,[x1(1) + x1(2)*(dt*cos(r(1))*tan(r(2)) + 1) - x1(3)*(dt*sin(r(1))*tan(r(2)) - 1),         dt*x1(3)*cos(r(1))*(tan(r(2))^2 + 1) + dt*x1(2)*sin(r(1))*(tan(r(2))^2 + 1),            0;                               - dt*x1(3)*cos(r(1)) - dt*x1(2)*sin(r(1)),                                                          x1(1) + x1(2) + x1(3),            0;             (dt*x1(2)*cos(r(1)))/cos(r(2)) - (dt*x1(3)*sin(r(1)))/cos(r(2)), (dt*x1(3)*cos(r(1))*sin(r(2)))/cos(r(2))^2 + (dt*x1(2)*sin(r(1))*sin(r(2)))/cos(r(2))^2, x1(1) + x1(2) + x1(3)]];
 
-g=ones(9);
+g=diag([1;1;1;1;1;1;1;1;1]);
 end
 
