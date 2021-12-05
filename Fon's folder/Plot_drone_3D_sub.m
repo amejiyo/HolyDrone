@@ -11,6 +11,11 @@ realRx=ZYX(:,3)
 realRy=ZYX(:,2)
 realRz=ZYX(:,1)
 
+setP_z=setpoint(:,1)
+setR_z=setpoint(:,2)
+
+
+
 realx=transpose(realx)
 realy=transpose(realy)
 realz=transpose(realz)
@@ -18,6 +23,10 @@ realt=transpose(realt)
 realRx=transpose(realRx)
 realRy=transpose(realRy)
 realRz=transpose(realRz)
+
+setP_z=transpose(setP_z)
+setR_z=transpose(setR_z)
+
 
 X=[]
 Y=[]
@@ -28,10 +37,12 @@ Rz=[]
 rotm=[1 0 0; 0 1 0;0 0 1];
 
 
-% fid = figure;
-% writerObj = VideoWriter('Simmulation3.avi'); % Name it.
-% writerObj.FrameRate = 20; % How many frames per second.
-% open(writerObj); 
+fid = figure;
+fid.Position(3:4) = [1920 1080];
+writerObj = VideoWriter('Simmulation3','MPEG-4'); % Name it.
+writerObj.FrameRate = 20; % How many frames per second.
+writerObj.Quality=100;
+open(writerObj); 
 
 
 
@@ -65,22 +76,22 @@ while(1)
        subplot('Position',[0.65 0.55 0.3 0.4])
        cla reset
        view(2)
-       plot(t,Z)
+       plot(t,Z,realt,setP_z)
        grid on
        xlabel('Time (s)') 
        ylabel('Position z (m)') 
        
        subplot('Position',[0.65 0.05 0.3 0.45])
        view(2)
-       plot(t,Rz)
+       plot(t,Rz,realt,setR_z)
        grid on
        xlabel('Time (s)') 
        ylabel('Yaw (rad)') 
 %        pause(1);
 
-%         figure(fid); % Makes sure you use your desired frame
-%         frame = getframe(gcf); % 'gcf' can handle if you zoom in to take a movie.
-%         writeVideo(writerObj, frame);
+        figure(fid); % Makes sure you use your desired frame
+        frame = getframe(gcf); % 'gcf' can handle if you zoom in to take a movie.
+        writeVideo(writerObj, frame);
       
         
         
@@ -102,5 +113,6 @@ while(1)
    disp(time)
 end
 
-% hold off
-% close(writerObj); % Saves the movie.
+hold off
+close(writerObj); % Saves the movie.
+clear
